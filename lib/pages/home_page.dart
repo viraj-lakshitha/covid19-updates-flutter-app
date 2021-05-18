@@ -1,3 +1,4 @@
+import 'package:corona_live_update_lk/objects/InfoCard.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {@override
@@ -5,18 +6,15 @@ class HomePage extends StatefulWidget {@override
 }
 
 class _HomePageState extends State<HomePage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              
-            ],
-          ),
-        ),
-      ),
+      // TODO : Add two buttons
+      // body: SafeArea(
+      //   child: ,
+      // )
     );
   }
 }

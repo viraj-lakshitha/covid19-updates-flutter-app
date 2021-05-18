@@ -21,6 +21,7 @@ class _DataLoadState extends State<DataLoad> {
     GlobalStats instanceGlobal = GlobalStats(url: 'https://hpb.health.gov.lk/api/get-current-statistical');
     await instanceGlobal.fetchData();
 
+    // TODO : Separate into two
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'lastUpdateTime' : instanceLocal.lastUpdateTime,
       'localNewCases' : instanceLocal.localNewCases,
