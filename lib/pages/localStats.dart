@@ -8,25 +8,40 @@ class LocalStats extends StatefulWidget {
 
 class _LocalStatsState extends State<LocalStats> {
 
-  Map data = {};
+  Map localData = {};
 
   @override
   Widget build(BuildContext context) {
 
-    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
+    localData = localData.isNotEmpty ? localData : ModalRoute.of(context)!.settings.arguments as Map;
 
     List<InfoCard> localInfo = [
-      InfoCard(stat: data['localNewCases'], updateTime: data['lastUpdateTime'], titleOfCard: 'Local New Cases', isLocal: true),
-      InfoCard(stat: data['localTotalCase'], updateTime: data['lastUpdateTime'], titleOfCard: 'Local Total Cases', isLocal: true),
-      InfoCard(stat: data['localNewDeath'], updateTime: data['lastUpdateTime'], titleOfCard: 'Local New Death',isLocal: true),
-      InfoCard(stat: data['localDeath'], updateTime: data['lastUpdateTime'], titleOfCard: 'Local Total Death',isLocal: true),
-      InfoCard(stat: data['localRecovered'], updateTime: data['lastUpdateTime'], titleOfCard: 'Local Recovered',isLocal: true),
+      InfoCard(stat: localData['localNewCases'], updateTime: localData['lastUpdateTime'], titleOfCard: 'Local New Cases', isLocal: true),
+      InfoCard(stat: localData['localTotalCase'], updateTime: localData['lastUpdateTime'], titleOfCard: 'Local Total Cases', isLocal: true),
+      InfoCard(stat: localData['localNewDeath'], updateTime: localData['lastUpdateTime'], titleOfCard: 'Local New Death',isLocal: true),
+      InfoCard(stat: localData['localDeath'], updateTime: localData['lastUpdateTime'], titleOfCard: 'Local Total Death',isLocal: true),
+      InfoCard(stat: localData['localRecovered'], updateTime: localData['lastUpdateTime'], titleOfCard: 'Local Recovered',isLocal: true),
     ];
 
     return Scaffold(
-        // body: SafeArea(
-        //   child: ,
-        // )
+        appBar: AppBar(
+          title: Center(child: Text('Local Corona Stats')),
+          backgroundColor: Colors.lightBlue[200],
+        ),
+        body: SafeArea(
+          child: Container(
+              child: Container(
+                child: ListView(
+                    children: localInfo.map( (currentStat) => InfoCard(
+                        updateTime: currentStat.updateTime,
+                        stat: currentStat.stat,
+                        titleOfCard: currentStat.titleOfCard,
+                        isLocal: currentStat.isLocal
+                    )).toList()
+                ),
+              )
+          ),
+        )
     );
   }
 }
