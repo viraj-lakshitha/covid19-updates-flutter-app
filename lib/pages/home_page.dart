@@ -10,7 +10,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Text('Home Page !'),
+          child: Column(
+            children: <Widget>[
+              
+            ],
+          ),
         ),
       ),
     );
