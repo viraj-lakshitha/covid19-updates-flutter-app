@@ -23,19 +23,38 @@ class _HomePageState extends State<HomePage> {
     String? lastDate = pcrTestData[pcrTestData.length-1].date;
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(80.0,0,80.0,0),
+      body: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Covid-19 Updates',
+            style: TextStyle(
+              fontSize: 22.0,
+              fontFamily: 'PTSerif',
+              fontWeight: FontWeight.w600
+            ),
+          ),
+          SizedBox(height: 5.0,),
+          Text(
+            'Source : Health Promotion Bureau - Sri Lanka',
+            style: TextStyle(
+              fontSize: 12.0,
+            ),
+          ),
+          SizedBox(height: 5.0,),
+          Divider(height: 5),
+          SizedBox(height: 50.0,),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12.0,0,12.0,0),
+            child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                border: Border.all(
-                  color: Colors.black54,
-                  width: 1.0
-                )
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  border: Border.all(
+                      color: Colors.black54,
+                      width: 1.0
+                  )
               ),
               child: SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
@@ -55,83 +74,110 @@ class _HomePageState extends State<HomePage> {
                         dataSource: pcrTestData,
                         xValueMapper: (PCR pcr, _) => pcr.date,
                         yValueMapper: (PCR pcr, _) => pcr.count,
-                        name: 'PCR Tests',
+                        isVisibleInLegend: false,
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(isVisible: false))
                   ]
               ),
             ),
-            SizedBox(height: 20.0,),
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/local', arguments: {
-                  'lastUpdateTime' : data['lastUpdateTime'],
-                  'localNewCases' : data['localNewCases'],
-                  'localTotalCase' : data['localTotalCase'],
-                  'localNewDeath' : data['localNewDeath'],
-                  'localDeath' : data['localDeath'],
-                  'localRecovered' : data['localRecovered'],
-                });
-              },
+          ),
+          SizedBox(height: 20.0,),
+          // ignore: deprecated_member_use
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.location_on_outlined
+                children: [
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/local', arguments: {
+                        'lastUpdateTime' : data['lastUpdateTime'],
+                        'localNewCases' : data['localNewCases'],
+                        'localTotalCase' : data['localTotalCase'],
+                        'localNewDeath' : data['localNewDeath'],
+                        'localDeath' : data['localDeath'],
+                        'localRecovered' : data['localRecovered'],
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                            Icons.location_on_outlined
+                        ),
+                        Text('Local')
+                      ],
                     ),
-                    Text('Local Data')
-                  ],
-                ),
-              color: Colors.lightBlue[200],
-              height: 50.0,
-            ),
-            SizedBox(height: 15.0,),
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/global', arguments: {
-                  'lastUpdateTime' : data['lastUpdateTime'],
-                  'globalNewCases' : data['globalNewCases'],
-                  'globalTotalCases' : data['globalTotalCases'],
-                  'globalNewDeath' : data['globalNewDeath'],
-                  'globalDeath' : data['globalDeath'],
-                  'globalRecovered' : data['globalRecovered']
-                });
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                        Icons.location_on_outlined
+                    color: Colors.lightBlue[200],
+                    height: 50.0,
+                  ),
+                  SizedBox(width: 15.0,),
+                  // ignore: deprecated_member_use
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/global', arguments: {
+                        'lastUpdateTime' : data['lastUpdateTime'],
+                        'globalNewCases' : data['globalNewCases'],
+                        'globalTotalCases' : data['globalTotalCases'],
+                        'globalNewDeath' : data['globalNewDeath'],
+                        'globalDeath' : data['globalDeath'],
+                        'globalRecovered' : data['globalRecovered']
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                            Icons.location_on_outlined
+                        ),
+                        Text('Global')
+                      ],
                     ),
-                    Text('Global Data')
-                  ],
-                ),
-              color: Colors.redAccent[200],
-              height: 50.0,
-            ),
-            SizedBox(height: 15.0,),
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/info');
-              },
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                        Icons.info_outline
+                    color: Colors.redAccent[200],
+                    height: 50.0,
+                  ),
+                  SizedBox(width: 15.0,),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/info');
+                    },
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                              Icons.info_outline
+                          ),
+                          Text(' Info')
+                        ],
+                      ),
                     ),
-                    Text(' Info')
-                  ],
-                ),
+                    color: Colors.black26,
+                    height: 50.0,
+                  ),
+                ],
               ),
-              color: Colors.black26,
-              height: 50.0,
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 50.0,),
+          Text(
+            'Developer : inforviraj@gmail.com',
+            style: TextStyle(
+              fontSize: 12.0,
+            ),
+          ),
+          SizedBox(height: 12.0,),
+          FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/load');
+              },
+            child: Icon(
+              Icons.refresh_outlined
+            ),
+          )
+        ],
+      ),
       ),
     );
   }

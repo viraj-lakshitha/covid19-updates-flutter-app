@@ -30,12 +30,12 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage('assets/corona-title.png'),
+                  image: AssetImage('assets/corona_logo.png'),
                   height: 80.0,
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  'Corona Live Updates',
+                  'Covid-19 Live Updates',
                   style: TextStyle(
                       fontFamily: 'PTSerif',
                       fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   style: TextStyle(
                       fontFamily: 'PTSerif',
                       fontWeight: FontWeight.w200,
-                      fontSize: 15.0
+                      fontSize: 18.0
                   ),
                 )],
             ),

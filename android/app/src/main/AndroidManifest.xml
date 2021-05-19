@@ -1,9 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lk.corona.update.corona_live_update_lk">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="corona_live_update_lk"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Covid-19 Updates"
+        android:icon="@mipmap/corona_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
