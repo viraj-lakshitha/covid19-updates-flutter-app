@@ -52,6 +52,8 @@ flutter:
   assets:
     - assets/bgImg.png
     - assets/corona_logo.png
+    - assets/hpb.png
+    - assets/dev.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
