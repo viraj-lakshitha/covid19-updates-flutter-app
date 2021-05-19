@@ -9,6 +9,7 @@ class LocalStats {
   int? localNewDeath;
   int? localDeath;
   int? localRecovered;
+  List? pcrData;
 
   LocalStats({required this.url});
 
@@ -26,6 +27,7 @@ class LocalStats {
       this.localNewDeath = fetchData['data']['local_new_deaths'];
       this.localDeath = fetchData['data']['local_deaths'];
       this.localRecovered = fetchData['data']['local_recovered'];
+      this.pcrData = fetchData['data']['daily_pcr_testing_data'];
 
     }catch (e) {
       print(e);

@@ -21,7 +21,24 @@ class _DataLoadState extends State<DataLoad> {
     GlobalStats instanceGlobal = GlobalStats(url: 'https://hpb.health.gov.lk/api/get-current-statistical');
     await instanceGlobal.fetchData();
 
-    // TODO : Separate into two
+    // //Create graph data
+    // List<String> pcrDate = [];
+    // List<int> pcrCount = [];
+    // for(int i = 1; i < instanceLocal.pcrData!.length; i++) {
+    //   pcrDate.add(instanceLocal.pcrData![i]['date']);
+    //   pcrCount.add(int.parse(instanceLocal.pcrData![i]['count']));
+    // }
+
+    // Create graph data using PCR object
+    List<PCR> pcrData = [];
+    for(int i = 1; i < instanceLocal.pcrData!.length; i++) {
+      PCR pcrObj = PCR(
+          date: instanceLocal.pcrData![i]['date'],
+          count: int.parse(instanceLocal.pcrData![i]['count'])
+      );
+      pcrData.add(pcrObj);
+    }
+
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'lastUpdateTime' : instanceLocal.lastUpdateTime,
       'localNewCases' : instanceLocal.localNewCases,
@@ -33,7 +50,10 @@ class _DataLoadState extends State<DataLoad> {
       'globalTotalCases' : instanceGlobal.globalTotalCases,
       'globalNewDeath' : instanceGlobal.globalNewDeath,
       'globalDeath' : instanceGlobal.globalDeath,
-      'globalRecovered' : instanceGlobal.globalRecovered
+      'globalRecovered' : instanceGlobal.globalRecovered,
+      'listOfPCRData' : pcrData
+      // 'listOfDatesOfPCR' : pcrDate,
+      // 'listOfCountsOfPCR' : pcrCount
     });
   }
 
@@ -59,4 +79,12 @@ class _DataLoadState extends State<DataLoad> {
       ),
     );
   }
+}
+
+// Template Class
+class PCR {
+  String? date;
+  int? count;
+
+  PCR({required String this.date, required int this.count});
 }

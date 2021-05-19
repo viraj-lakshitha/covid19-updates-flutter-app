@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lk.corona.update.corona_live_update_lk">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
    <application
         android:label="corona_live_update_lk"
         android:icon="@mipmap/ic_launcher">

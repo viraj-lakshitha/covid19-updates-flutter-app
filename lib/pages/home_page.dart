@@ -1,5 +1,9 @@
 import 'package:corona_live_update_lk/objects/InfoCard.dart';
+import 'package:corona_live_update_lk/pages/data_loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {@override
   _HomePageState createState() => _HomePageState();
@@ -9,11 +13,14 @@ class _HomePageState extends State<HomePage> {
 
   // Initialize Empty Map
   Map data = {};
+  List<PCR> pcrTestData = [];
 
   @override
   Widget build(BuildContext context) {
 
     data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
+    pcrTestData = data['listOfPCRData'];
+    String? lastDate = pcrTestData[pcrTestData.length-1].date;
 
     return Scaffold(
       body: Padding(
@@ -22,6 +29,39 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                border: Border.all(
+                  color: Colors.black54,
+                  width: 1.0
+                )
+              ),
+              child: SfCartesianChart(
+                  primaryXAxis: CategoryAxis(),
+                  // Chart title
+                  title: ChartTitle(text: 'PCR Tests\nfrom 2020-02-18 to $lastDate',
+                      textStyle: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w600
+                      )
+                  ),
+                  // Enable legend
+                  legend: Legend(isVisible: true),
+                  // Enable tooltip
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  series: <ChartSeries<PCR, String>>[
+                    LineSeries<PCR, String>(
+                        dataSource: pcrTestData,
+                        xValueMapper: (PCR pcr, _) => pcr.date,
+                        yValueMapper: (PCR pcr, _) => pcr.count,
+                        name: 'PCR Tests',
+                        // Enable data label
+                        dataLabelSettings: DataLabelSettings(isVisible: false))
+                  ]
+              ),
+            ),
+            SizedBox(height: 20.0,),
             // ignore: deprecated_member_use
             FlatButton(
               onPressed: () {

@@ -11,8 +11,10 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Container(
-            child: Text('Info Page'),
+          child: Center(
+            child: Container(
+              child: Text('- Under Development -'),
+            ),
           ),
         )
     );
